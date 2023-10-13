@@ -104,7 +104,7 @@ def feedback():
 @app.route('/dashboard')
 def dashboard():
     conn = mysql.connector.connect(**db_config)
-    cur = conn.cursor()
+    cur = conn.cursor(dictionary=True)
 
     # retrieve all feedback from the database
     cur.execute("SELECT * FROM feedback")
