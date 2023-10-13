@@ -1,0 +1,25 @@
+<!-- Admin Dashboard for Managing Feedback -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+    <!-- List of Feedback -->
+    <ul>
+        <!-- Use Jinja2 templating to loop through feedbacks and display them -->
+        {% for feedback in feedbacks %}
+            <li>
+                <!-- Print the title and content of each feedback -->
+                <h2>{{ feedback.title }}</h2>
+                <p>{{ feedback.feedback }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

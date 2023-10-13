@@ -1,0 +1,47 @@
+/* Reset some default styling */
+body, ul, h1, h2, form, input, textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+/* Style for the body element */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Add some padding and backgrond color to the form elements */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+/* Style for the input and textarea elements */
+input[type=submit] {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Style for the list of feedbacks */
+ul {
+    list-style: none;
+    padding: 20px;
+}
+
+/* Style for each feedback item */
+li {
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Style for 'Register here' link */
+#newaccount {
+    text-align: center;
+}

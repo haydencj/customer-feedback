@@ -1,0 +1,25 @@
+<!-- Feedback Submission Form -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Submit Feedback</title>
+</head>
+<body>
+    <h1>Submit Feedback</h1>
+    <form method="post" action="/feedback">
+        <!-- Title Field -->
+        <label for="titile">Title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <!-- Feedback Field -->
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" name="feedback"></textarea><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
