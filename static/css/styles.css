@@ -1,5 +1,5 @@
 /* Reset some default styling */
-body, ul, h1, h2, form, input, textarea {
+body, ul, h1, h2, form, input, textarea, p {
     margin: 0;
     padding: 0;
     border: none;
@@ -43,5 +43,10 @@ li {
 
 /* Style for 'Register here' link */
 #newaccount {
+    text-align: center;
+}
+
+/* Style for 'Submit feedback' link */
+#newfeedback {
     text-align: center;
 }
