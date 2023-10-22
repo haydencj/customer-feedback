@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import os
 from dotenv import load_dotenv
 from flask_mysqldb import MySQL
@@ -8,6 +8,8 @@ load_dotenv()
 
 # create flask
 app = Flask(__name__)
+
+app.secret_key = os.environ.get('SECRET_KEY')
 
 db_config = {
     'host': 'localhost',
@@ -90,10 +92,26 @@ def feedback():
         # insert feedback into the database
         conn = mysql.connector.connect(**db_config)
         cur = conn.cursor()
-        cur.execute("INSERT INTO feedback(title, feedback) VALUES(%s, %s)", (title, feedback))
-        conn.commit()
-        cur.close()
-        conn.close()
+        current_row_count = cur.rowcount
+
+        try:
+            cur.execute("INSERT INTO feedback(title, feedback) VALUES(%s, %s)", (title, feedback))
+            conn.commit()
+
+            # Check if feedback is submitted successfully
+            if cur.rowcount > current_row_count: 
+                flash('Feedback submitted!')
+            else:
+                flash('Failed to submit feedback.')
+        
+        except mysql.connector.Error as err:
+            print("Error: ", err)
+            conn.rollback()
+            flash('An error occurred while submitting feedback.')
+
+        finally:
+            cur.close()
+            conn.close()
 
         return redirect(url_for('login'))
 
@@ -113,11 +131,8 @@ def dashboard():
     cur.close()
     conn.close()
 
-    if feedbacks:
-        # render the dashboard with feedback data
-        return render_template('dashboard.html', feedbacks=feedbacks)
-    else:
-        return 'No Feedback Available'
+    # render the dashboard with feedback data
+    return render_template('dashboard.html', feedbacks=feedbacks)
 
 # delete feedback route
 @app.route('/delete_feedback/<int:id>', methods=['POST'])

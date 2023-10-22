@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>User Login</h1>
+
     <form method="post" action="/login">
         <div class="container">
             <div class="centered-div">
@@ -25,11 +26,38 @@
             </div>
         </div>
     </form>
+
     <p id="newaccount">
         <a href="{{ url_for('register') }}">Don't have an account? Register here.</a>
     </p>
     <p id="newfeedback"> or <br> 
         <a href="{{ url_for('feedback') }}">Submit feedback</a>
     </p>
+
+    <!-- JavaScript Script for Notifications -->
+    <script>
+        // Request permission to display notifications
+        document.addEventListener('DOMContentLoaded', function () {
+            if (Notification.permission !== 'granted') {
+                Notification.requestPermission();
+            }
+        });
+
+        // Function to show notification
+        function showNotification(message) {
+            if (Notification.permission === 'granted') {
+                var notification = new Notification('Feedback Submitted', {
+                    body: message,
+                });
+            }
+        }
+
+        // Check if there are any flash messages and show them as notifications
+        var message = "{{ get_flashed_messages()[0] if get_flashed_messages() else '' }}";
+        if (message) {
+            showNotification(message);
+        }
+    </script>
+
 </body>
 </html>

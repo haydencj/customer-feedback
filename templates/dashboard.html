@@ -10,21 +10,29 @@
 <body>
     <h1>Admin Dashboard</h1>
 
+    <a href="{{ url_for('login') }}">
+        <button type="button">Home</button>
+    </a>
+
     <!-- List of Feedback -->
     <ul>
+        {% if feedbacks %}
         <!-- Use Jinja2 templating to loop through feedbacks and display them -->
-        {% for feedback in feedbacks %}
-            <li>
-                <!-- Print the title and content of each feedback -->
-                <h2>{{ feedback.title }}</h2>
-                <p>{{ feedback.feedback }}</p>
+            {% for feedback in feedbacks %}
+                <li>
+                    <!-- Print the title and content of each feedback -->
+                    <h2>{{ feedback.title }}</h2>
+                    <p>{{ feedback.feedback }}</p>
 
-                <!-- Delete Button -->
-                <form method="post" action="{{ url_for('delete_feedback', id=feedback.id) }}">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        {% endfor %}
+                    <!-- Delete Button -->
+                    <form method="post" action="{{ url_for('delete_feedback', id=feedback.id) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>No Feedback Available</li>
+        {% endif %}
     </ul>
 </body>
 </html>
