@@ -95,7 +95,8 @@ def feedback():
         cur.close()
         conn.close()
 
-        return 'Feedback Submitted'
+        return redirect(url_for('login'))
+
     
     # render the feedback form
     return render_template('feedback.html')
@@ -118,5 +119,22 @@ def dashboard():
     else:
         return 'No Feedback Available'
 
+# delete feedback route
+@app.route('/delete_feedback/<int:id>', methods=['POST'])
+def delete_feedback(id):
+    print(f"Deleting feedback with ID: {id}")
+
+    conn = mysql.connector.connect(**db_config)
+    cur = conn.cursor(dictionary=True)
+
+    # Delete the feedback from the database
+    cur.execute("DELETE FROM feedback WHERE id = %s", (id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    # Redirect back to the dashboard
+    return redirect(url_for('dashboard'))
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3000)
