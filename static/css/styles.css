@@ -1,11 +1,7 @@
-/* Reset some default styling */
-body, ul, h1, h2, form, input, textarea, p {
+p {
     margin: 0;
     padding: 0;
-    border: none;
-    outline: none;
 }
-
 /* Style for the body element */
 body {
     font-family: Arial, sans-serif;
@@ -51,14 +47,32 @@ li {
     text-align: center;
 }
 
-.container {
+.login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 30%;
+    border-radius: 10px;
+    background-color: rgb(168, 167, 167);
 }
 
-.centered-div {
-    width: 50%;
-    /* padding: 20px; */
+.dashboard-container{
+    display: flex;
+    align-items: center;
+    margin: 1em;
+    gap: 2em;
 }
+
+input[type=email],
+input[type=password],
+input[type=submit]{
+    padding: 1em;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+/* .centered-div {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+} */
